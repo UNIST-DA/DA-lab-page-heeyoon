@@ -1,0 +1,5 @@
+{% if page.lang == "ko" %}
+  <a href="{{ page.en_url | default: '/' | relative_url }}">EN</a>
+{% else %}
+  <a href="{{ page.ko_url | default: '/ko/' | relative_url }}">KO</a>
+{% endif %}

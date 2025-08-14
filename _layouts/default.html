@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="{{ page.lang | default: 'en' }}">
+<head>
+  <meta charset="utf-8">
+  <title>{{ page.title | default: site.title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% feed_meta %}
+</head>
+<body>
+  <header>
+    <div class="container bar">
+      <div class="brand"><a href="{{ '/' | relative_url }}">Data Analytics Lab</a></div>
+      {% include nav.html %}
+    </div>
+  </header>
+
+  <main class="container">
+    {{ content }}
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>&copy; {{ site.time | date: '%Y' }} Data Analytics Lab — UNIST</div>
+    </div>
+  </footer>
+</body>
+</html>

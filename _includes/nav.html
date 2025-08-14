@@ -1,0 +1,8 @@
+<nav>
+  {% assign menu = site.nav %}
+  {% if page.lang == "ko" %}{% assign menu = site.nav_ko %}{% endif %}
+  {% for item in menu %}
+    <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+  {% endfor %}
+  <span class="langswitch">{% include lang_switch.html %}</span>
+</nav>

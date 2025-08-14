@@ -1,0 +1,15 @@
+---
+layout: default
+---
+<h1>{{ page.title }}</h1>
+<p>{{ page.description }}</p>
+<div class="card-grid">
+{% assign items = site.members | sort: 'weight' %}
+{% for m in items %}
+  <div class="card">
+    <h3><a href="{{ m.url | relative_url }}">{{ m.title }}</a></h3>
+    <div>{{ m.role }}</div>
+    {% if m.groups %}<div class="badge">{{ m.groups | join: ', ' }}</div>{% endif %}
+  </div>
+{% endfor %}
+</div>
