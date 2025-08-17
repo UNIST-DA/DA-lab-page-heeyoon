@@ -84,7 +84,7 @@ function loadMarkdown(selector, path){
   const update = () => {
     const y = window.scrollY || window.pageYOffset;
     // 배경 위치를 아주 살짝 위/아래로 (0.25 비율) 움직임
-    hero.style.backgroundPosition = `center calc(50% + ${y * 0.25}px)`;
+    hero.style.backgroundPosition = `center calc(50% + ${y * 0.5}px)`;
     ticking = false;
   };
   window.addEventListener('scroll', ()=>{
