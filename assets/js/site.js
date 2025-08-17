@@ -9,23 +9,37 @@ function mdToHtml(md){
   const lines = md.split(/\r?\n/);
   let html = '';
   let inList = false;
-  function closeList(){ if(inList){ html += '</ul>'; inList=false; } }
-  for(let raw of lines){
+  const closeList = () => { if(inList){ html += '</ul>'; inList=false; } };
+
+  for (let raw of lines){
     const line = raw.trimEnd();
+
+    // 빈 줄
     if(!line){
       closeList();
       html += '<p></p>';
       continue;
     }
+
+    // 🔴 HTML 블록은 그대로 통과 (갤러리 <div>나 <img> 사용 가능)
+    if (/^\s*<[^>]+>/.test(line)){
+      closeList();
+      html += line;           // escape 안 함
+      continue;
+    }
+
+    // 헤딩/리스트/문단
     if(/^###\s+/.test(line)){ closeList(); html += '<h3>'+escapeHtml(line.replace(/^###\s+/,''))+'</h3>'; continue; }
-    if(/^##\s+/.test(line)){ closeList(); html += '<h2>'+escapeHtml(line.replace(/^##\s+/,''))+'</h2>'; continue; }
-    if(/^#\s+/.test(line)){ closeList(); html += '<h1>'+escapeHtml(line.replace(/^#\s+/,''))+'</h1>'; continue; }
-    if(/^-\s+/.test(line) || /^\*\s+/.test(line)){
+    if(/^##\s+/.test(line)){  closeList(); html += '<h2>'+escapeHtml(line.replace(/^##\s+/,''))+'</h2>'; continue; }
+    if(/^#\s+/.test(line)){   closeList(); html += '<h1>'+escapeHtml(line.replace(/^#\s+/,''))+'</h1>'; continue; }
+
+    if(/^[-*]\s+/.test(line)){
       if(!inList){ html += '<ul>'; inList = true; }
-      const item = line.replace(/^[-*]\s+/,'');
+      const item = line.replace(/^[-*]\s+/, '');
       html += '<li>'+inlineFmt(escapeHtml(item))+'</li>';
       continue;
     }
+
     closeList();
     html += '<p>'+inlineFmt(escapeHtml(line))+'</p>';
   }
