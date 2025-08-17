@@ -33,7 +33,13 @@ function mdToHtml(md){
   return html;
 }
 function inlineFmt(s){
+  // Images: ![alt](url)
+  s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />');
+  // Links: [text](url)
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  // **bold**
   s = s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  // *italic*
   s = s.replace(/\*(.+?)\*/g,'<em>$1</em>');
   return s;
 }
