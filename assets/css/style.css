@@ -24,7 +24,7 @@ a:hover{text-decoration:underline}
 .hero{
   background: linear-gradient(rgba(11,30,74,.55), rgba(11,30,74,.55)), url('../img/hero.jpg') center/cover no-repeat;
   color:#fff;
-  padding:120px 0;
+  padding:200px 0;
 }
 .hero .hero-inner{ text-align:center }
 .hero h1{font-size:42px;margin:0 0 10px}
