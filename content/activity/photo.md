@@ -1,1 +1,1 @@
-![DA Ghibli](../assets/img/DA_ZEBRI.png)
+![DA Ghibli](../../assets/img/DA_ZEBRI.png)
