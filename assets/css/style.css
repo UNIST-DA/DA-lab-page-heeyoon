@@ -21,7 +21,12 @@ a:hover{text-decoration:underline}
 .submenu li a:hover{background:rgba(255,255,255,.08)}
 .has-sub:hover .submenu{display:block}
 
-.hero{background:linear-gradient(rgba(11,30,74,.55),rgba(11,30,74,.55)), url('assets/img/hero.png') center/cover no-repeat; color:#fff; padding:120px 0}
+.hero{
+  background:linear-gradient(rgba(11,30,74,.55),rgba(11,30,74,.55)), 
+             url('assets/img/hero.jpg') center/cover no-repeat; 
+  color:#fff; 
+  padding:120px 0;
+}
 .hero .hero-inner{ text-align:center }
 .hero h1{font-size:42px;margin:0 0 10px}
 .hero .sub{opacity:.95;margin:0 0 16px}
