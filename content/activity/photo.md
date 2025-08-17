@@ -1,1 +1,1 @@
-Photo gallery will be added here.
+![DA Ghibli](../assets/img/DA_ZEBRI.png)
