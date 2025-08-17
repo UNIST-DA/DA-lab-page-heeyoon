@@ -46,3 +46,49 @@ function loadMarkdown(selector, path){
     .then(t => { document.querySelector(selector).innerHTML = mdToHtml(t); })
     .catch(e => { document.querySelector(selector).innerHTML = '<p style="color:#b91c1c">Failed to load content.</p>'; });
 }
+// NAV 그림자/블러: 스크롤 시 헤더에 클래스 토글
+(function(){
+  const header = document.querySelector('.site-header');
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 10) header.classList.add('nav-scrolled');
+    else header.classList.remove('nav-scrolled');
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+})();
+
+// 스크롤 등장 애니메이션: IntersectionObserver
+(function(){
+  // 페이지에 이미 있는 주요 블록들을 자동으로 대상 지정 (HTML 수정 불필요)
+  const targets = document.querySelectorAll(
+    '.hero .hero-inner, .section, .card, .qcard, .paper'
+  );
+  targets.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.12});
+  targets.forEach(el => io.observe(el));
+})();
+
+// 히어로 패럴랙스(가벼운 느낌): 스크롤에 따라 배경 살짝 이동
+(function(){
+  const hero = document.querySelector('.hero');
+  if(!hero) return;
+  let ticking = false;
+  const update = () => {
+    const y = window.scrollY || window.pageYOffset;
+    // 배경 위치를 아주 살짝 위/아래로 (0.25 비율) 움직임
+    hero.style.backgroundPosition = `center calc(50% + ${y * 0.25}px)`;
+    ticking = false;
+  };
+  window.addEventListener('scroll', ()=>{
+    if(!ticking){ requestAnimationFrame(update); ticking = true; }
+  }, {passive:true});
+  update();
+})();
